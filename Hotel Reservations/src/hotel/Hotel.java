@@ -15,8 +15,8 @@ public class Hotel implements InterHotel{
 		customers = new ArrayList<Customer>();
 	}
 	
-	public void addRoom(String roomtype, String bedtype, Integer rNumber){
-		this.lRooms.add(new Room(roomtype, bedtype, rNumber));
+	public void addRoom(String roomtype, String bedtype, Integer rNumber, Integer price){
+		this.lRooms.add(new Room(roomtype, bedtype, rNumber, price));
 	}
 	
 	public void addCustomer(String s){
@@ -38,6 +38,10 @@ public class Hotel implements InterHotel{
 	}
 	
 	public void seeBookedRooms(){
+		if (customers.size()==0){
+			System.out.println("There are no customers registered.");
+			return;
+		}
 		for (Customer cust : customers){
 			if (cust.roomAssigned){
 				System.out.println("Room number " + cust.roomNumber + " is occupied by customer " + cust.name + ".");
@@ -46,19 +50,23 @@ public class Hotel implements InterHotel{
 	}
 	
 	public void seeCustomers(){
+		if (customers.size()==0){
+			System.out.println("There are no customers registered.");
+			return;
+		}
 		for (Customer cust : customers){
 			System.out.println("Customer name : " + cust.name + " , customer age: " + cust.age + ".");
 		}
 	}
 	
 	public int assignRoom(String s){
-		//String[] spliter = s.split("//|");
+
 		String[] stringparts = s.split("\\|");
 		
 		for(Customer cust : this.customers){
 			if (cust.name.trim().equals(stringparts[0].trim())){				
 				if (cust.isAssigned()){
-					System.out.println("Entra aqui!");
+					System.out.println("Customer already has a room assigned.");
 					return -1;
 				}				
 				for (Room nroom : lRooms){
@@ -68,6 +76,7 @@ public class Hotel implements InterHotel{
 						return nroom.rNumber;
 					}
 				}
+				System.out.println("There are no rooms available.");
 				return -1;
 			}
 		}
@@ -88,5 +97,9 @@ public class Hotel implements InterHotel{
 			}
 		}
 		return -1;
+	}
+	
+	public void getPrice(Integer n){
+		System.out.println("The price for room number " + (n) + " is " + lRooms.get(n-100).getPrice() + "€ .");
 	}
 }

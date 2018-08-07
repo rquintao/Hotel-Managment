@@ -11,21 +11,22 @@ public class Room {
 	//ArrayList<Integer> guest;
 	Integer rNumber;
 	
-	public Room(String roomtype, String bedtype, Integer rNumber){
+	public Room(String roomtype, String bedtype, Integer rNumber, Integer price){
 		//this.guest = new ArrayList<Integer>();
 		this.roomtype = roomtype;
 		this.bedtype = bedtype;
 		this.rNumber=rNumber;
+		this.price = price;
 	}
 	
 	public void setPrice(Integer price){
 		this.price = price;
 	}
 	
-	/*public void setGuest(Integer idGuest){
-		this.guest.add(idGuest);
-		System.out.println("Guest was matched to room!");
-	}*/
+	public int getPrice(){
+		return this.price;
+	}
+
 	
 	public void book(boolean booked){
 		this.booked = booked;
